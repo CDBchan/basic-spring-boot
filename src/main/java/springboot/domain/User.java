@@ -35,10 +35,14 @@ public class User implements UserDetails {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "nickname",unique = true)
+	private String nickname;
+
 	@Builder
-	public User(String email, String password,String Auth) {
+	public User(String email, String password,String nickname) {
 		this.email = email;
 		this.password = password;
+		this.nickname = nickname;
 	}
 
 	@Override
@@ -78,5 +82,10 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		// true -> 계정이 사용 가능하다.
 		return true;
+	}
+
+	public User update(String nickname) {
+		this.nickname = nickname;
+		return this;
 	}
 }
